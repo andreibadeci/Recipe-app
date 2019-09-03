@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Licenta</string>
+    <string name="button_1">Button 1</string>
+    <string name="button_2">Button 2</string>
+    <string name="button_4">Button 4</string>
+    <string name="button_3">Button 3</string>
+    <string name="button_5">Button 5</string>
+    <string name="this_is_f3a2">This is F3A2</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="add_user">Add user</string>
+    <string name="remove_user">Remove user</string>
+    <string name="empty_not_saved">Recipe was not saved because there were missing items.</string>
+    <string name="add_recipe">Add recipe</string>
+    <string name="update_recipe">Update recipe</string>
+    <string name="name">Name</string>
+    <string name="cooking_notes">Cooking notes</string>
+    <string name="preparation_time">Preparation time</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="delete_button">Delete button</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="accept"><![CDATA[I accept Terms & Conditions]]></string>
+    <string name="submit">Submit</string>
+    <string name="error_email_input">Fill the input with a valid email address</string>
+    <string name="error_name_input">Fill the input with a valid name</string>
+    <string name="error_accepted_tc"><![CDATA[Please accept Terms & Conditions]]></string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="recipe_not_owned">You can\'t edit a recipe you do not own</string>
+    <string name="take_picture">Take picture</string>
+</resources>

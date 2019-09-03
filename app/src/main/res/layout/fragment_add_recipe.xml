@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/name"
+        android:padding="@dimen/space_8"/>
+
+    <Spinner
+        android:id="@+id/spinnerPrep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_8"/>
+
+    <Spinner
+        android:id="@+id/spinnerType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_8"/>
+
+    <EditText
+        android:id="@+id/editTextNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/cooking_notes"
+        android:padding="@dimen/space_8"/>
+
+    <EditText
+        android:id="@+id/editTextPrepTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/preparation_time"
+        android:padding="@dimen/space_8"/>
+
+    <EditText
+        android:id="@+id/editTextIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/ingredients"
+        android:padding="@dimen/space_8"/>
+
+    <!--
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_8">
+
+        <ImageView
+            android:id="@+id/imageViewImage"
+            android:layout_width="@dimen/space_200"
+            android:layout_height="@dimen/space_200"
+            android:src="@drawable/placeholder"/>
+
+        <View
+            android:layout_width="@dimen/space_0"
+            android:layout_height="@dimen/space_0"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/buttonPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/take_picture"
+            android:layout_marginTop="@dimen/space_70"/>
+
+    </LinearLayout>
+    -->
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_recipe"
+        android:layout_gravity="center"
+        android:padding="@dimen/space_8"/>
+
+</LinearLayout>
