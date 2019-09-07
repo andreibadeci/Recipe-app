@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.licenta.Models.User;
 import com.example.licenta.R;
 
 public class RegisterFragment extends Fragment {
@@ -28,6 +29,8 @@ public class RegisterFragment extends Fragment {
     private EditText mEditTextPassword;
     private CheckBox mCheckBoxAccept;
     private Button mButton;
+
+    private UserViewModel mUserViewModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -61,6 +64,7 @@ public class RegisterFragment extends Fragment {
         mCheckBoxAccept = view.findViewById(R.id.checkbox_accept);
         mButton = view.findViewById(R.id.buttonAccept);
 
+        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,12 +84,13 @@ public class RegisterFragment extends Fragment {
                     String lastName = mEditTextLastName.getText().toString();
                     String email = mEditTextEmail.getText().toString();
                     String password = mEditTextPassword.getText().toString();
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "FIRST_NAME", firstName);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "LAST_NAME", lastName);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "EMAIL", email);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "PASSWORD", password);
-                    getActivity().setResult(Activity.RESULT_OK);
-                    getActivity().finish();
+
+                    User user = new User(firstName, lastName, email, password);
+                    mUserViewModel.insert(user);
+
+                    ApplicationData.setIntValueInSharedPreferences(getActivity().getApplication(), "USER_ID", user.getId());
+
+                    getFragmentManager().popBackStack();
                 }
             }
         });

@@ -29,7 +29,9 @@ import java.util.Set;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.example.licenta.Models.Recipe;
 import com.example.licenta.R;
 import com.example.licenta.Utils.Constants;
 import com.squareup.picasso.Picasso;
@@ -49,6 +51,7 @@ public class AddRecipeFragment extends Fragment implements AdapterView.OnItemSel
     private ArrayAdapter<String> mAdapterSpinnerPrep;
     private ArrayAdapter<String> mAdapterSpinnerType;
 
+    private RecipeViewModel mRecipeViewModel;
 
     @Override
     public void onAttach(Context context) {
@@ -97,6 +100,8 @@ public class AddRecipeFragment extends Fragment implements AdapterView.OnItemSel
         mSpinnerPrep.setPrompt("How easy it is to make it?");
         mSpinnerType.setPrompt("What kind of a dish it is?");
 
+        mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
+
         final Button button = view.findViewById(R.id.buttonAdd);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -114,16 +119,29 @@ public class AddRecipeFragment extends Fragment implements AdapterView.OnItemSel
                     String type = mSpinnerType.getSelectedItem().toString();
                     String note = mEditTextNote.getText().toString();
                     String prepTime = mEditTextPrepTime.getText().toString();
-                    String ingredients = mEditTextIngredients.getText().toString();
+                    String ingredientString = mEditTextIngredients.getText().toString();
 
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "NAME", name);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "PREPARATION", prep);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "TYPE", type);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "NOTE", note);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "PREPARATION_TIME", prepTime);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "INGREDIENTS", ingredients);
-                    getActivity().setResult(Activity.RESULT_OK);
-                    getActivity().finish();
+                    Integer userId = ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID");
+
+                    List<String> aux = Arrays.asList(ingredientString.split("\\s*,\\s*"));
+                    Iterator<String> iterator = aux.iterator();
+                    List<String> aux2 = new ArrayList<>();
+                    while (iterator.hasNext()) {
+                        aux2.add(iterator.next());
+                    }
+                    iterator = aux2.iterator();
+                    List<String> ingredientList = new ArrayList<>();
+                    while (iterator.hasNext()){
+                        aux = Arrays.asList(iterator.next().split("\\s* \\s*"));
+                        ingredientList.add(aux.get(0));
+                        ingredientList.add(aux.get(1));
+                    }
+                    ArrayList<String> ingredients = new ArrayList<>(ingredientList);
+
+                    Recipe recipe = new Recipe(name, prep, note, type, prepTime, ingredients, userId);
+                    mRecipeViewModel.insert(recipe);
+
+                    getFragmentManager().popBackStack();
                 }
             }
         });

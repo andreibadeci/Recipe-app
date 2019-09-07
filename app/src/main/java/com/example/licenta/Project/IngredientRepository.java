@@ -27,8 +27,7 @@ public class IngredientRepository {
         new updateAsyncTask(mIngredientDao).execute(ingredient);
     }
 
-    void find(String name) { new findAsyncTask(mIngredientDao, delegate).execute(name);
-    }
+    void find(String name) { new findAsyncTask(mIngredientDao, delegate).execute(name); }
 
     void delete(Ingredient ingredient) { new deleteAsyncTask(mIngredientDao).execute(ingredient); }
 

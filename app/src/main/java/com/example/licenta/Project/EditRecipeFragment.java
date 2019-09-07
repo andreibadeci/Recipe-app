@@ -17,12 +17,16 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.example.licenta.Models.Recipe;
 import com.example.licenta.R;
 
 public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -40,6 +44,7 @@ public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSe
     private ArrayAdapter<String> mAdapterSpinnerPrep;
     private ArrayAdapter<String> mAdapterSpinnerType;
 
+    private RecipeViewModel mRecipeViewModel;
 
     @Override
     public void onAttach(Context context) {
@@ -96,36 +101,49 @@ public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSe
         mSpinnerPrep.setPrompt("How easy it is to make it?");
         mSpinnerType.setPrompt("What kind of a dish it is?");
 
+        mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
+
         final Button editButton = view.findViewById(R.id.buttonUpdate);
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (TextUtils.isEmpty(mEditTextName.getText())) {
                     mEditTextName.setError("Please fill the input");
-                } else if (TextUtils.isEmpty(mEditTextNote.getText())){
+                } else if (TextUtils.isEmpty(mEditTextNote.getText())) {
                     mEditTextNote.setError("Please fill the input");
-                } else if (TextUtils.isEmpty(mEditTextPrepTime.getText())){
+                } else if (TextUtils.isEmpty(mEditTextPrepTime.getText())) {
                     mEditTextPrepTime.setError("Please fill the input");
-                } else if (TextUtils.isEmpty(mEditTextIngredients.getText())){
+                } else if (TextUtils.isEmpty(mEditTextIngredients.getText())) {
                     mEditTextIngredients.setError("Please fill the input");
                 } else {
+                    int id = bundle.getInt("ID");
                     String name = mEditTextName.getText().toString();
                     String prep = mSpinnerPrep.getSelectedItem().toString();
                     String type = mSpinnerType.getSelectedItem().toString();
                     String note = mEditTextNote.getText().toString();
                     String prepTime = mEditTextPrepTime.getText().toString();
-                    String ingredients = mEditTextIngredients.getText().toString();
-                    int id = bundle.getInt("ID");
-                    String idString = "" + id;
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "ID", idString);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "NAME", name);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "PREPARATION", prep);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "TYPE", type);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "NOTE", note);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "PREPARATION_TIME", prepTime);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "INGREDIENTS", ingredients);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "BUTTON", "Edit");
-                    getActivity().setResult(Activity.RESULT_OK);
-                    getActivity().finish();
+                    String ingredientString = mEditTextIngredients.getText().toString();
+
+                    Integer userId = ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID");
+
+                    List<String> aux = Arrays.asList(ingredientString.split("\\s*,\\s*"));
+                    Iterator<String> iterator = aux.iterator();
+                    List<String> aux2 = new ArrayList<>();
+                    while (iterator.hasNext()) {
+                        aux2.add(iterator.next());
+                    }
+                    iterator = aux2.iterator();
+                    List<String> ingredientList = new ArrayList<>();
+                    while (iterator.hasNext()) {
+                        aux = Arrays.asList(iterator.next().split("\\s* \\s*"));
+                        ingredientList.add(aux.get(0));
+                        ingredientList.add(aux.get(1));
+                    }
+                    ArrayList<String> ingredients = new ArrayList<>(ingredientList);
+
+                    Recipe recipe = new Recipe(id, name, prep, note, type, prepTime, ingredients, userId);
+                    mRecipeViewModel.update(recipe);
+
+                    getFragmentManager().popBackStack();
                 }
             }
         });
@@ -134,17 +152,34 @@ public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSe
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 int id = bundle.getInt("ID");
-                String idString = "" + id;
-                ApplicationData.setStringValueInSharedPreferences(getActivity(), "ID", idString);
-                ApplicationData.deleteValueFromSharedPreferences(getActivity(), "NAME");
-                ApplicationData.deleteValueFromSharedPreferences(getActivity(), "PREPARATION");
-                ApplicationData.deleteValueFromSharedPreferences(getActivity(), "TYPE");
-                ApplicationData.deleteValueFromSharedPreferences(getActivity(), "NOTE");
-                ApplicationData.deleteValueFromSharedPreferences(getActivity(), "PREPARATION_TIME");
-                ApplicationData.deleteValueFromSharedPreferences(getActivity(), "INGREDIENTS");
-                ApplicationData.setStringValueInSharedPreferences(getActivity(), "BUTTON", "Delete");
-                getActivity().setResult(Activity.RESULT_OK);
-                getActivity().finish();
+                String name = mEditTextName.getText().toString();
+                String prep = mSpinnerPrep.getSelectedItem().toString();
+                String type = mSpinnerType.getSelectedItem().toString();
+                String note = mEditTextNote.getText().toString();
+                String prepTime = mEditTextPrepTime.getText().toString();
+                String ingredientString = mEditTextIngredients.getText().toString();
+
+                Integer userId = ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID");
+
+                List<String> aux = Arrays.asList(ingredientString.split("\\s*,\\s*"));
+                Iterator<String> iterator = aux.iterator();
+                List<String> aux2 = new ArrayList<>();
+                while (iterator.hasNext()) {
+                    aux2.add(iterator.next());
+                }
+                iterator = aux2.iterator();
+                List<String> ingredientList = new ArrayList<>();
+                while (iterator.hasNext()) {
+                    aux = Arrays.asList(iterator.next().split("\\s* \\s*"));
+                    ingredientList.add(aux.get(0));
+                    ingredientList.add(aux.get(1));
+                }
+                ArrayList<String> ingredients = new ArrayList<>(ingredientList);
+
+                Recipe recipe = new Recipe(id, name, prep, note, type, prepTime, ingredients, userId);
+                mRecipeViewModel.delete(recipe);
+
+                getFragmentManager().popBackStack();
             }
         });
 

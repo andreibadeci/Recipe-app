@@ -29,4 +29,11 @@
     <string name="password">Password</string>
     <string name="recipe_not_owned">You can\'t edit a recipe you do not own</string>
     <string name="take_picture">Take picture</string>
+    <string name="recipe">Recipe</string>
+    <string name="profile">Profile</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

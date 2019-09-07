@@ -2,6 +2,7 @@ package com.example.licenta.Project;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -15,15 +16,19 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.licenta.R;
+import com.example.licenta.Utils.AsyncResult;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements AsyncResult {
 
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
     private Button mButton;
+
+    private UserViewModel mUserViewModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -54,6 +59,8 @@ public class LoginFragment extends Fragment {
         mEditTextPassword = view.findViewById(R.id.editTextPassword);
         mButton = view.findViewById(R.id.buttonAccept);
 
+        mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,13 +71,26 @@ public class LoginFragment extends Fragment {
                 } else {
                     String email = mEditTextEmail.getText().toString();
                     String password = mEditTextPassword.getText().toString();
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "EMAIL", email);
-                    ApplicationData.setStringValueInSharedPreferences(getActivity(), "PASSWORD", password);
-                    getActivity().setResult(Activity.RESULT_OK);
-                    getActivity().finish();
+
+                    UserRepository userRepository = new UserRepository(getActivity().getApplication());
+                    getInterface(userRepository);
+                    userRepository.find(email, password);
+
                 }
             }
         });
 
     }
+
+    public void getInterface(UserRepository userRepository){
+        userRepository.delegate = this;
+    }
+
+    @Override
+    public void processFinish(Integer output) {
+        ApplicationData.setIntValueInSharedPreferences(getActivity().getApplication(), "USER_ID", output);
+        getFragmentManager().popBackStack();
+        getFragmentManager().popBackStack();
+    }
+
 }
