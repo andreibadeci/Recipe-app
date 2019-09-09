@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.licenta.Models.User;
 import com.example.licenta.R;
 import com.example.licenta.Utils.AsyncResult;
 
@@ -93,4 +94,8 @@ public class LoginFragment extends Fragment implements AsyncResult {
         getFragmentManager().popBackStack();
     }
 
+    @Override
+    public void processFinish(User user) {
+        ;
+    }
 }

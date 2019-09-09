@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navProfile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ProfileFragment(), Constants.FRAGMENT_PROFILE)
                         .addToBackStack("PROFILE_FRAGMENT").commit();
-                break;
-            case R.id.navShare:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.navSend:
-                Toast.makeText(this, "Send", Toast.LENGTH_SHORT).show();
-                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

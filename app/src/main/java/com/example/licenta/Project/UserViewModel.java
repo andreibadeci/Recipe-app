@@ -3,9 +3,9 @@ package com.example.licenta.Project;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.licenta.Models.User;
-
 
 public class UserViewModel extends AndroidViewModel {
 

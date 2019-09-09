@@ -3,6 +3,8 @@ package com.example.licenta.Project;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.licenta.Dao.UserDao;
 import com.example.licenta.Database.UserDatabase;
 import com.example.licenta.Models.User;
@@ -12,6 +14,7 @@ import com.example.licenta.Utils.AsyncResult;
 public class UserRepository {
 
     private UserDao mUserDao;
+
     public AsyncResult delegate = null;
 
     UserRepository(Application application) {
@@ -30,6 +33,8 @@ public class UserRepository {
 
     }
 
+    void getUser(int id) { new UserRepository.getUserDataAsyncTask(mUserDao, delegate).execute(id); }
+
     void insert(User user) {
         new UserRepository.insertAsyncTask(mUserDao).execute(user);
     }
@@ -44,6 +49,27 @@ public class UserRepository {
     }
 
     void delete(User user) { new UserRepository.deleteAsyncTask(mUserDao).execute(user); }
+
+    private static class getUserDataAsyncTask extends AsyncTask<Integer, Void, User> {
+
+        private UserDao mAsyncTaskDao;
+        public AsyncResult delegate = null;
+
+        getUserDataAsyncTask(UserDao mAsyncTaskDao, AsyncResult asyncResult) {
+            this.mAsyncTaskDao = mAsyncTaskDao;
+            this.delegate = asyncResult;
+        }
+
+        @Override
+        protected User doInBackground(Integer ... id) {
+            return mAsyncTaskDao.getUser(id[0]);
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            super.onPostExecute(user);
+        }
+    }
 
     private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
 
@@ -64,7 +90,7 @@ public class UserRepository {
 
         private UserDao mAsyncTaskDao;
 
-        public updateAsyncTask(UserDao mAsyncTaskDao) {
+        updateAsyncTask(UserDao mAsyncTaskDao) {
             this.mAsyncTaskDao = mAsyncTaskDao;
         }
 
@@ -100,7 +126,7 @@ public class UserRepository {
 
         private UserDao mAsyncTaskDao;
 
-        public deleteAsyncTask(UserDao mAsyncTaskDao) {
+        deleteAsyncTask(UserDao mAsyncTaskDao) {
             this.mAsyncTaskDao = mAsyncTaskDao;
         }
 
