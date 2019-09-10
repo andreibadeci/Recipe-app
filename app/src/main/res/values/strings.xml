@@ -38,4 +38,18 @@
     <string name="delete_ingredient">Delete ingredient</string>
     <string name="delete_recipe">Delete recipe</string>
     <string name="add_ingredient">Add ingredient</string>
+    <string name="edit_ingredient">Edit ingredient</string>
+    <string name="add_new_ingredient">Add new ingredient</string>
+    <string name="add_new_recipe">Add new recipe</string>
+    <string name="edit_recipe">Edit recipe</string>
+    <string name="your_profile">Your profile</string>
+    <string name="recipe_name">Recipe Name:</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="type">Type:</string>
+    <string name="cooking_notes1">Cooking notes:</string>
+    <string name="ingredients1">Ingredients:</string>
+    <string name="aplicatie_android_pentru_retete_gastronomice">Aplicatie Android pentru retete gastronomice</string>
+    <string name="ingredient_name">Ingredient name:</string>
+    <string name="quantity1">Quantity:</string>
+    <string name="unit1">Unit:</string>
 </resources>

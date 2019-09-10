@@ -5,23 +5,71 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/space_8">
 
-    <TextView
-        android:id="@+id/textViewName"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_8"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textViewQuantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_8"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ingredient_name"
+            android:textSize="@dimen/size_16"
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:padding="@dimen/space_8"
+            android:layout_weight="0.5"/>
 
-    <TextView
-        android:id="@+id/textViewUnit"
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_8"
+            android:layout_weight="0.27"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_8"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity1"
+            android:textSize="@dimen/size_16"
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:padding="@dimen/space_8"
+            android:layout_weight="0.5"/>
+
+        <TextView
+            android:id="@+id/textViewQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_8"
+            android:layout_weight="0.27"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/unit1"
+            android:textSize="@dimen/size_16"
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:padding="@dimen/space_8"
+            android:layout_weight="0.5"/>
+
+        <TextView
+            android:id="@+id/textViewUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_8"
+            android:layout_weight="0.27"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

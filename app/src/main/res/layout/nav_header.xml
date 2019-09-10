@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Aplicatie Android pentru retete gastronomice"
+        android:text="@string/aplicatie_android_pentru_retete_gastronomice"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
