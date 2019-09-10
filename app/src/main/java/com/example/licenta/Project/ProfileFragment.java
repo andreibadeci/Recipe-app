@@ -29,7 +29,6 @@ public class ProfileFragment extends Fragment implements AsyncResult {
     private EditText mEditTextLastName;
     private EditText mEditTextEmail;
     private EditText mEditTextPassword;
-    private Button mButton;
 
     private UserViewModel mUserViewModel;
 
@@ -51,21 +50,33 @@ public class ProfileFragment extends Fragment implements AsyncResult {
             mEditTextLastName = view.findViewById(R.id.editTextLastName);
             mEditTextEmail = view.findViewById(R.id.editTextEmail);
             mEditTextPassword = view.findViewById(R.id.editTextPassword);
-            mButton = view.findViewById(R.id.buttonAccept);
 
             mUserViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
             UserRepository userRepository = new UserRepository(getActivity().getApplication());
             userRepository.delegate = this;
 
+            int test = ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID");
+
             userRepository.getUser(ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID"));
+            String ceva = ApplicationData.getStringValueFromSharedPreferences(getActivity().getApplication(), "FIRST_NAME");
 
             mEditTextFirstName.setText(ApplicationData.getStringValueFromSharedPreferences(getActivity().getApplication(), "FIRST_NAME"));
             mEditTextLastName.setText(ApplicationData.getStringValueFromSharedPreferences(getActivity().getApplication(), "LAST_NAME"));
             mEditTextEmail.setText(ApplicationData.getStringValueFromSharedPreferences(getActivity().getApplication(), "EMAIL"));
             mEditTextPassword.setText(ApplicationData.getStringValueFromSharedPreferences(getActivity().getApplication(), "PASSWORD"));
 
-            mButton.setOnClickListener(new View.OnClickListener() {
+            Button buttonSignOut = view.findViewById(R.id.buttonSignOut);
+            buttonSignOut.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ApplicationData.deleteValueFromSharedPreferences(getActivity().getApplication(),"USER_ID");
+                    getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new RecipeFragment()).commit();
+                }
+            });
+
+            Button buttonAccept = view.findViewById(R.id.buttonAccept);
+            buttonAccept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (TextUtils.isEmpty(mEditTextFirstName.getText())) {
@@ -89,7 +100,7 @@ public class ProfileFragment extends Fragment implements AsyncResult {
 
                         ApplicationData.setIntValueInSharedPreferences(getActivity().getApplication(), "USER_ID", user.getId());
 
-                        getFragmentManager().popBackStack();
+                        getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new RecipeFragment()).commit();
                     }
                 }
             });

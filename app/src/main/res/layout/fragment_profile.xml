@@ -89,6 +89,15 @@
             android:text="@string/save_changes"
             android:textColor="@android:color/white" />
 
+        <Button
+            android:id="@+id/buttonSignOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:background="@color/colorPrimary"
+            android:text="@string/sign_out"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

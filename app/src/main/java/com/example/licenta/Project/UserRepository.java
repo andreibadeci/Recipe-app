@@ -62,12 +62,13 @@ public class UserRepository {
 
         @Override
         protected User doInBackground(Integer ... id) {
-            return mAsyncTaskDao.getUser(id[0]);
+            User user = mAsyncTaskDao.getUser(id[0]);
+            return user;
         }
 
         @Override
         protected void onPostExecute(User user) {
-            super.onPostExecute(user);
+            delegate.processFinish(user);
         }
     }
 

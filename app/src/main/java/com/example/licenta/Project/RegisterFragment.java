@@ -20,8 +20,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.licenta.Models.User;
 import com.example.licenta.R;
+import com.example.licenta.Utils.AsyncResult;
 
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements AsyncResult {
 
     private EditText mEditTextFirstName;
     private EditText mEditTextLastName;
@@ -88,12 +89,30 @@ public class RegisterFragment extends Fragment {
                     User user = new User(firstName, lastName, email, password);
                     mUserViewModel.insert(user);
 
-                    ApplicationData.setIntValueInSharedPreferences(getActivity().getApplication(), "USER_ID", user.getId());
+                    UserRepository userRepository = new UserRepository(getActivity().getApplication());
+                    getInterface(userRepository);
+                    userRepository.find(email, password);
 
-                    getFragmentManager().popBackStack();
                 }
             }
         });
 
     }
+
+    public void getInterface(UserRepository userRepository){
+        userRepository.delegate = this;
+    }
+
+    @Override
+    public void processFinish(Integer output) {
+        ApplicationData.setIntValueInSharedPreferences(getActivity().getApplication(), "USER_ID", output);
+        getFragmentManager().popBackStack();
+        getFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void processFinish(User user) {
+        ;
+    }
+
 }

@@ -3,21 +3,29 @@ package com.example.licenta.Project;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.licenta.Dao.IngredientDao;
 import com.example.licenta.Database.IngredientDatabase;
 import com.example.licenta.Models.Ingredient;
 import com.example.licenta.Utils.AsyncResult;
 
+import java.util.List;
+
 public class IngredientRepository {
 
     private IngredientDao mIngredientDao;
+    private LiveData<List<Ingredient>> mAllIngredients;
+
     public AsyncResult delegate = null;
 
     IngredientRepository(Application application) {
         IngredientDatabase db = IngredientDatabase.getDatabase(application);
         mIngredientDao = db.ingredientDao();
+        mAllIngredients = mIngredientDao.getAlphabetizedIngredients();
     }
 
+    LiveData<List<Ingredient>> getAllIngredients() { return mAllIngredients; }
 
     void insert(Ingredient ingredient) {
         new insertAsyncTask(mIngredientDao).execute(ingredient);
