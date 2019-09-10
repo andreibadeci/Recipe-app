@@ -1,11 +1,5 @@
 <resources>
     <string name="app_name">Licenta</string>
-    <string name="button_1">Button 1</string>
-    <string name="button_2">Button 2</string>
-    <string name="button_4">Button 4</string>
-    <string name="button_3">Button 3</string>
-    <string name="button_5">Button 5</string>
-    <string name="this_is_f3a2">This is F3A2</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="add_user">Add user</string>
@@ -38,4 +32,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="save_changes">Save changes</string>
     <string name="sign_out">Sign out</string>
+    <string name="quantity">Quantity</string>
+    <string name="unit">Unit</string>
+    <string name="update_ingredient">Update ingredient</string>
+    <string name="delete_ingredient">Delete ingredient</string>
+    <string name="delete_recipe">Delete recipe</string>
+    <string name="add_ingredient">Add ingredient</string>
 </resources>

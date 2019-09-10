@@ -10,46 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:padding="@dimen/space_8"/>
-
-    <Spinner
-        android:id="@+id/spinnerPrep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_8"/>
-
-    <Spinner
-        android:id="@+id/spinnerType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:hint="@string/name"
         android:padding="@dimen/space_8"/>
 
     <EditText
-        android:id="@+id/editTextNotes"
+        android:id="@+id/editTextQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:hint="@string/quantity"
         android:padding="@dimen/space_8"/>
 
     <EditText
-        android:id="@+id/editTextPrepTime"
+        android:id="@+id/editTextUnit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:padding="@dimen/space_8"/>
-
-    <EditText
-        android:id="@+id/editTextIngredients"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
+        android:hint="@string/unit"
         android:padding="@dimen/space_8"/>
 
     <Button
         android:id="@+id/buttonUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/update_recipe"
+        android:text="@string/update_ingredient"
         android:layout_gravity="center"
         android:padding="@dimen/space_8"
         android:background="@color/colorPrimary"
@@ -60,7 +44,7 @@
         android:id="@+id/buttonDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/delete_recipe"
+        android:text="@string/delete_ingredient"
         android:layout_gravity="center"
         android:padding="@dimen/space_8"
         android:background="@color/design_default_color_error"
