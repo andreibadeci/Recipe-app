@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.licenta.Models.Recipe;
 import com.example.licenta.R;
+import com.squareup.picasso.Picasso;
 
 public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -122,6 +123,7 @@ public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSe
                     String note = mEditTextNote.getText().toString();
                     String prepTime = mEditTextPrepTime.getText().toString();
                     String ingredientString = mEditTextIngredients.getText().toString();
+                    String picture = "https://i.pinimg.com/474x/1b/99/de/1b99de65f1dc53e260650e69bb9f9f2c--pita-recipes-greek-recipes.jpg";
 
                     Integer userId = ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID");
 
@@ -140,7 +142,7 @@ public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSe
                     }
                     ArrayList<String> ingredients = new ArrayList<>(ingredientList);
 
-                    Recipe recipe = new Recipe(id, name, prep, note, type, prepTime, ingredients, userId);
+                    Recipe recipe = new Recipe(id, name, prep, note, type, prepTime, ingredients, picture, userId);
                     mRecipeViewModel.update(recipe);
 
                     getFragmentManager().popBackStack();
@@ -158,6 +160,7 @@ public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSe
                 String note = mEditTextNote.getText().toString();
                 String prepTime = mEditTextPrepTime.getText().toString();
                 String ingredientString = mEditTextIngredients.getText().toString();
+                String picture = "https://i.pinimg.com/474x/1b/99/de/1b99de65f1dc53e260650e69bb9f9f2c--pita-recipes-greek-recipes.jpg";
 
                 Integer userId = ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID");
 
@@ -176,7 +179,7 @@ public class EditRecipeFragment extends Fragment implements AdapterView.OnItemSe
                 }
                 ArrayList<String> ingredients = new ArrayList<>(ingredientList);
 
-                Recipe recipe = new Recipe(id, name, prep, note, type, prepTime, ingredients, userId);
+                Recipe recipe = new Recipe(id, name, prep, note, type, prepTime, ingredients, picture, userId);
                 mRecipeViewModel.delete(recipe);
 
                 getFragmentManager().popBackStack();

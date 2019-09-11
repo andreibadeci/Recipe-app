@@ -15,7 +15,7 @@ import com.example.licenta.Models.Recipe;
 import com.example.licenta.Models.User;
 
 
-@Database(entities = {Recipe.class}, version = 1, exportSchema = false)
+@Database(entities = {Recipe.class, User.class}, version = 1, exportSchema = false)
 @TypeConverters({RecipeDao.Converters.class})
 public abstract class RecipeDatabase extends RoomDatabase {
 

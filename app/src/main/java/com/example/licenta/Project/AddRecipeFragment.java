@@ -44,6 +44,7 @@ public class AddRecipeFragment extends Fragment implements AdapterView.OnItemSel
     private EditText mEditTextNote;
     private EditText mEditTextPrepTime;
     private EditText mEditTextIngredients;
+    private ImageView mImageViewRecipe;
 
     private List<String> mSpinnerPrepData;
     private List<String> mSpinnerTypeData;
@@ -84,6 +85,7 @@ public class AddRecipeFragment extends Fragment implements AdapterView.OnItemSel
         mEditTextNote = view.findViewById(R.id.editTextNotes);
         mEditTextPrepTime = view.findViewById(R.id.editTextPrepTime);
         mEditTextIngredients = view.findViewById(R.id.editTextIngredients);
+        mImageViewRecipe = view.findViewById(R.id.imageViewRecipe);
 
         mSpinnerPrepData = getSourcePrep();
         mSpinnerTypeData = getSourceType();
@@ -120,6 +122,7 @@ public class AddRecipeFragment extends Fragment implements AdapterView.OnItemSel
                     String note = mEditTextNote.getText().toString();
                     String prepTime = mEditTextPrepTime.getText().toString();
                     String ingredientString = mEditTextIngredients.getText().toString();
+                    String picture = "https://i.pinimg.com/474x/1b/99/de/1b99de65f1dc53e260650e69bb9f9f2c--pita-recipes-greek-recipes.jpg";
 
                     Integer userId = ApplicationData.getIntValueFromSharedPreferences(getActivity().getApplication(), "USER_ID");
 
@@ -138,7 +141,7 @@ public class AddRecipeFragment extends Fragment implements AdapterView.OnItemSel
                     }
                     ArrayList<String> ingredients = new ArrayList<>(ingredientList);
 
-                    Recipe recipe = new Recipe(name, prep, note, type, prepTime, ingredients, userId);
+                    Recipe recipe = new Recipe(name, prep, note, type, prepTime, ingredients, picture, userId);
                     mRecipeViewModel.insert(recipe);
 
                     getFragmentManager().popBackStack();

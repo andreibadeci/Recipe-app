@@ -84,6 +84,7 @@ public class RecipeFragment extends Fragment {
                     String note = recipe.getNote();
                     String prepTime = recipe.getPrepTime();
                     ArrayList<String> ingredients = recipe.getIngredients();
+                    String picture = recipe.getPicture();
 
                     Bundle bundle = new Bundle();
                     bundle.putInt("ID", id);
@@ -93,6 +94,7 @@ public class RecipeFragment extends Fragment {
                     bundle.putString("NOTE", note);
                     bundle.putString("PREPARATION_TIME", prepTime);
                     bundle.putStringArrayList("INGREDIENTS", ingredients);
+                    bundle.putString("PICTURE", picture);
 
                     Fragment editFragment = new EditRecipeFragment();
                     editFragment.setArguments(bundle);

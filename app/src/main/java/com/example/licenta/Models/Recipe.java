@@ -41,11 +41,15 @@ public class Recipe {
     private ArrayList<String> mIngredients;
 
     @NonNull
+    @ColumnInfo(name = "picture")
+    private String mPicture;
+
+    @NonNull
     @ColumnInfo(name = "userID")
     private Integer mUserId;
 
     public Recipe(int id, @NonNull String name, @NonNull String preparation, @NonNull String note, @NonNull String type,
-                  @NonNull String prepTime, @NonNull ArrayList<String> ingredients, @NonNull Integer userId) {
+                  @NonNull String prepTime, @NonNull ArrayList<String> ingredients, @NonNull String mPicture, @NonNull Integer userId) {
         this.mId = id;
         this.mName = name;
         this.mPreparation = preparation;
@@ -53,17 +57,19 @@ public class Recipe {
         this.mType = type;
         this.mPrepTime = prepTime;
         this.mIngredients = ingredients;
+        this.mPicture = mPicture;
         this.mUserId = userId;
     }
 
     @Ignore public Recipe(@NonNull String name, @NonNull String preparation, @NonNull String note, @NonNull String type,
-                          @NonNull String prepTime, @NonNull ArrayList<String> ingredients, @NonNull Integer userId) {
+                          @NonNull String prepTime, @NonNull ArrayList<String> ingredients, @NonNull String mPicture, @NonNull Integer userId) {
         this.mName = name;
         this.mPreparation = preparation;
         this.mNote = note;
         this.mType = type;
         this.mPrepTime = prepTime;
         this.mIngredients = ingredients;
+        this.mPicture = mPicture;
         this.mUserId = userId;
     }
 
@@ -125,6 +131,15 @@ public class Recipe {
     }
 
     public void setIngredients(@NonNull ArrayList<String> ingredients) { this.mIngredients = ingredients; }
+
+    @NonNull
+    public String getPicture() {
+        return mPicture;
+    }
+
+    public void setPicture(@NonNull String mPicture) {
+        this.mPicture = mPicture;
+    }
 
     @NonNull
     public Integer getUserId() { return mUserId; }

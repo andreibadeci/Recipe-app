@@ -56,7 +56,6 @@ public class AddIngredientFragment extends Fragment {
 
         mIngredientViewModel = ViewModelProviders.of(this).get(IngredientViewModel.class);
 
-
         final Button button = view.findViewById(R.id.buttonAdd);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,11 +64,8 @@ public class AddIngredientFragment extends Fragment {
                     mEditTextName.setError("Please fill he input");
                 } else if (TextUtils.isEmpty(mEditTextQuantity.getText())) {
                     mEditTextQuantity.setError("Please fill he input");
-                } else if (TextUtils.isEmpty(mEditTextUnit.getText())) {
-                    mEditTextUnit.setError("Please fill he input");
                 } else {
                     String name = mEditTextName.getText().toString();
-                    String quantityString = mEditTextQuantity.getText().toString();
                     double quantity = Double.parseDouble(mEditTextQuantity.getText().toString());
                     String unit = mEditTextUnit.getText().toString();
 

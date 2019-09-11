@@ -1,8 +1,10 @@
 package com.example.licenta.Project;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.licenta.Models.Recipe;
 import com.example.licenta.R;
+import com.squareup.picasso.Picasso;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
@@ -45,6 +48,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             ingredients = ingredientsAux.concat(iterator.next());
         }
         holder.textViewIngredients.setText(ingredients);
+        Picasso.get().load(current.getPicture()).into(holder.imageViewRecipe);
     }
 
     void setRecipes(List<Recipe> recipes) {
@@ -64,6 +68,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         private final TextView textViewNotes;
         private final TextView textViewPrepTime;
         private final TextView textViewIngredients;
+        private final ImageView imageViewRecipe;
 
 
         private RecipeViewHolder(View itemView) {
@@ -74,6 +79,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             textViewNotes = itemView.findViewById(R.id.textViewNotes);
             textViewPrepTime = itemView.findViewById(R.id.textViewPrepTime);
             textViewIngredients = itemView.findViewById(R.id.textViewIngredients);
+            imageViewRecipe = itemView.findViewById(R.id.imageViewRecipe);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -70,8 +70,6 @@ public class EditIngredientFragment extends Fragment {
                     mEditTextName.setError("Please fill he input");
                 } else if (TextUtils.isEmpty(mEditTextQuantity.getText())) {
                     mEditTextQuantity.setError("Please fill he input");
-                } else if (TextUtils.isEmpty(mEditTextUnit.getText())) {
-                    mEditTextUnit.setError("Please fill he input");
                 } else {
                     int id = bundle.getInt("ID");
                     String name = mEditTextName.getText().toString();
@@ -93,7 +91,6 @@ public class EditIngredientFragment extends Fragment {
             public void onClick(View v) {
                 int id = bundle.getInt("ID");
                 String name = mEditTextName.getText().toString();
-                String quantityString = mEditTextQuantity.getText().toString();
                 double quantity = Double.parseDouble(mEditTextQuantity.getText().toString());
                 String unit = mEditTextUnit.getText().toString();
 
